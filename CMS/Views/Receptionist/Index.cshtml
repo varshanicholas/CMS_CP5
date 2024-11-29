@@ -1,0 +1,81 @@
+﻿@model IEnumerable<CMS.Models.Patients>
+
+@{
+    ViewData["Title"] = "Patient Records";
+}
+
+<h1>Patient Records</h1>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <a asp-action="Create" class="btn btn-outline-info btn-sm">Add New Patient</a>
+
+    <!-- Search form -->
+    <form asp-action="Index" method="get" class="d-flex" style="max-width: 400px;" id="searchForm">
+        <input type="text" name="search" class="form-control form-control-sm me-2"
+               placeholder="Search by Name or Phone" value="@ViewData["Query"]" id="searchInput" />
+        <button type="submit" class="btn btn-outline-secondary btn-sm me-2">Search</button>
+
+        <!-- Clear Search button -->
+        @if (!string.IsNullOrWhiteSpace(ViewData["Query"] as string))
+        {
+            <a href="javascript:void(0)" id="clearSearch" class="btn btn-outline-danger btn-sm">Clear Search</a>
+        }
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.PatientId)</th>
+            <th>@Html.DisplayNameFor(model => model.PatientName)</th>
+            <th>@Html.DisplayNameFor(model => model.DOB)</th>
+            <th>@Html.DisplayNameFor(model => model.Gender)</th>
+            <th>@Html.DisplayNameFor(model => model.BloodGroup)</th>
+            <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.Address)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.DateOfRegistration)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pat in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => pat.PatientId)</td>
+                <td>@Html.DisplayFor(modelItem => pat.PatientName)</td>
+                <td>@Html.DisplayFor(modelItem => pat.DOB)</td>
+                <td>@Html.DisplayFor(modelItem => pat.Gender)</td>
+                <td>@Html.DisplayFor(modelItem => pat.BloodGroup)</td>
+                <td>@Html.DisplayFor(modelItem => pat.PhoneNumber)</td>
+                <td>@Html.DisplayFor(modelItem => pat.Address)</td>
+                <td>@Html.DisplayFor(modelItem => pat.Email)</td>
+                <td>@Html.DisplayFor(modelItem => pat.DateOfRegistration)</td>
+                <td>
+                    <div class="d-flex justify-content-around gap-2" style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);">
+                        <a asp-action="Details" asp-route-id="@pat.PatientId" class="btn btn-outline-info btn-sm">Details</a>
+                        <a asp-action="Edit" asp-route-id="@pat.PatientId" class="btn btn-outline-info btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@pat.PatientId" class="btn btn-outline-info btn-sm">Delete</a>
+                        <a asp-controller="Receptionist" asp-action="BookAppointment" asp-route-id="@pat.PatientId" class="btn btn-outline-info btn-sm">Book Appointment</a>
+                        <!-- Show Book Appointment button when not searching -->
+                        @if ((bool)ViewData["IsSearchResult"])
+                        {
+                            <a asp-controller="Receptionist" asp-action="BookAppointment" asp-route-id="@pat.PatientId"
+                               class="btn btn-outline-primary btn-sm">Book Appointment</a>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        // Clear search functionality
+        document.getElementById('clearSearch').addEventListener('click', function () {
+            document.getElementById('searchInput').value = '';  // Clear the input field
+            document.getElementById('searchForm').submit(); // Trigger form submit to reload the page without search query
+        });
+    </script>
+}

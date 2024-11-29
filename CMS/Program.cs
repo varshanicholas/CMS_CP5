@@ -10,8 +10,12 @@ namespace CMS
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
            
            // builder.Services.AddScoped<IConsultationRepository, ConsultationRepository>();
+
+
+            builder.Services.AddScoped<IReceptionistRepository, ReceptionistRepository>();
 
             var app = builder.Build();
 
