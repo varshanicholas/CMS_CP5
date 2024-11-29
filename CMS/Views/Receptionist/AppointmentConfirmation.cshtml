@@ -1,0 +1,48 @@
+﻿@model CMS.Models.AppointmentConfirmationViewModel
+
+@{
+    ViewData["Title"] = "AppointmentConfirmation";
+}
+
+<h1>AppointmentConfirmation</h1>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-success text-white">
+            <h2 class="text-center">Appointment Confirmation</h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Appointment ID:</strong> @Model.AppointmentId</p>
+            <p><strong>Appointment Date:</strong> @Model.AppointmentDate.ToString("dd MMM yyyy")</p>
+
+            <p><strong>Patient Name:</strong> @Model.PatientName</p>
+            <p><strong>Token Number:</strong> @Model.TokenNumber</p>
+
+            <p><strong>Doctor ID:</strong> @Model.DoctorId</p>
+            <p><strong>Doctor Name:</strong> @Model.DoctorName</p>
+        </div>
+        <div class="card-footer text-center">
+            <a href="@Url.Action("Index", "Receptionist")" class="btn btn-primary">Go back to Home</a>
+            @*            <a href="@Url.Action("ViewAppointments", "Appointments")" class="btn btn-secondary">View All Appointments</a>
+            *@
+            <p>Click the button to print the current page.</p>
+            <button onclick="window.print()">Print this page</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .card {
+        max-width: 600px;
+        margin: 0 auto;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn {
+        margin: 10px;
+    }
+</style>
+

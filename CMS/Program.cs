@@ -1,3 +1,5 @@
+using CMS.Repository;
+
 namespace CMS
 {
     public class Program
@@ -8,7 +10,7 @@ namespace CMS
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddScoped<IReceptionistRepository, ReceptionistRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
