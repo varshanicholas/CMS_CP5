@@ -1,0 +1,196 @@
+﻿@model CMS.Models.Staff
+
+@{
+    ViewData["Title"] = "Add Staff";
+}
+
+<h1>Add Staff</h1>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+<h4>Staff Details</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="AddStaff" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <!-- StaffId -->
+            <div class="form-group">
+                <label asp-for="StaffId" class="control-label"></label>
+                <input asp-for="StaffId" class="form-control" />
+                <span asp-validation-for="StaffId" class="text-danger"></span>
+            </div>
+
+            <!-- First Name -->
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <!-- Last Name -->
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <!-- Gender -->
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <select asp-for="Gender" class="form-control">
+                    <option value="">-- Select Gender --</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="form-group">
+                <label asp-for="DateOfBirth" class="control-label"></label>
+                <input asp-for="DateOfBirth" class="form-control" type="date" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+
+            <!-- Blood Group Dropdown -->
+            <div class="form-group">
+                <label asp-for="BloodGroup" class="control-label"></label>
+                <select asp-for="BloodGroup" class="form-control">
+                    <option value="">Select Blood Group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+                <span asp-validation-for="BloodGroup" class="text-danger"></span>
+            </div>
+
+            <!-- Joining Date -->
+            <div class="form-group">
+                <label asp-for="JoiningDate" class="control-label"></label>
+                <input asp-for="JoiningDate" class="form-control" type="date" />
+                <span asp-validation-for="JoiningDate" class="text-danger"></span>
+            </div>
+
+            <!-- Salary -->
+            <div class="form-group">
+                <label asp-for="Salary" class="control-label"></label>
+                <input asp-for="Salary" class="form-control" type="number" step="0.01" />
+                <span asp-validation-for="Salary" class="text-danger"></span>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" type="tel" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" type="email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <!-- Qualification Dropdown -->
+            <div class="form-group">
+                <label asp-for="Qualification" class="control-label"></label>
+                <select asp-for="Qualification" class="form-control">
+                    <option value="">Select Qualification</option>
+                    <option value="BSc">BSc</option>
+                    <option value="MSc">MSc</option>
+                    <option value="BTech">BTech</option>
+                    <option value="MTech">MTech</option>
+                    <option value="BCom">BCom</option>
+                    <option value="MCom">MCom</option>
+                    <option value="MBA">MBA</option>
+                    <option value="PhD">PhD</option>
+                    <option value="Diploma">Diploma</option>
+                    <option value="Other">Other</option>
+                </select>
+                <span asp-validation-for="Qualification" class="text-danger"></span>
+            </div>
+
+
+            <!-- Address -->
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <textarea asp-for="Address" class="form-control"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <!-- Department -->
+            <div class="form-group">
+                <label asp-for="DepartmentName" class="control-label"></label>
+                <select asp-for="DepartmentName" class="form-control">
+                    <option value="">-- Select Department --</option>
+                    @foreach (var department in ViewBag.Departments as List<string>)
+                    {
+                        <option value="@department">@department</option>
+                    }
+                </select>
+                <span asp-validation-for="DepartmentName" class="text-danger"></span>
+            </div>
+
+            <!-- Role -->
+            <div class="form-group">
+                <label asp-for="RoleName" class="control-label"></label>
+                <select asp-for="RoleName" class="form-control">
+                    <option value="">-- Select Role --</option>
+                    @foreach (var role in ViewBag.Roles as List<string>)
+                    {
+                        <option value="@role">@role</option>
+                    }
+                </select>
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+
+            <!-- Experience -->
+            <div class="form-group">
+                <label asp-for="Experience" class="control-label"></label>
+                <input asp-for="Experience" class="form-control" type="number" />
+                <span asp-validation-for="Experience" class="text-danger"></span>
+            </div>
+
+            <!-- Is Active Checkbox -->
+            <div class="form-check">
+                <input asp-for="IsActive" class="form-check-input" type="checkbox" />
+                <label asp-for="IsActive" class="form-check-label">Active</label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group mt-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="StaffList">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

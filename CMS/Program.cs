@@ -1,3 +1,5 @@
+using CMS.Repository;
+
 namespace CMS
 {
     public class Program
@@ -8,6 +10,8 @@ namespace CMS
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+           
+           // builder.Services.AddScoped<IConsultationRepository, ConsultationRepository>();
 
             var app = builder.Build();
 
@@ -34,3 +38,7 @@ namespace CMS
         }
     }
 }
+
+
+//  builder.Services.AddScoped<IStaffRepository, StaffRepository>();
+//            builder.Services.AddScoped<ILoginRepository, LoginRepository>();
