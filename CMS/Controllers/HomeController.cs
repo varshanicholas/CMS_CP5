@@ -13,6 +13,7 @@ namespace CMS.Controllers
             _logger = logger;
         }
 
+
         public IActionResult Index()
         {
             return View();
@@ -30,3 +31,5 @@ namespace CMS.Controllers
         }
     }
 }
+
+

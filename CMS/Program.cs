@@ -1,3 +1,5 @@
+using CMS.Repository;
+
 namespace CMS
 {
     public class Program
@@ -6,8 +8,11 @@ namespace CMS
         {
             var builder = WebApplication.CreateBuilder(args);
 
+
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
 
             var app = builder.Build();
 
@@ -28,9 +33,13 @@ namespace CMS
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Pharmacist}/{action=MedicinePrescriptions}/{id?}");
 
             app.Run();
         }
     }
 }
+
+
+
+//builder.Services.AddScoped<IPharmacistRepository, PharmacistRepository>();

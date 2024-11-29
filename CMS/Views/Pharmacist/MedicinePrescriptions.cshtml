@@ -1,0 +1,96 @@
+﻿@model IEnumerable<CMS.Models.MedicinePrescriptionModel>
+
+
+@{
+    ViewData["Title"] = "MedicinePrescriptions";
+}
+<style>
+    /* Full Background Image Styling */
+    body {
+        margin: 0;
+        padding: 0;
+        background: url('@Url.Content("~/images/ASP1.JPG")') no-repeat center center fixed;
+        background-size: cover; /* Ensures the image covers the full page */
+        height: 100vh; /* Ensures the body takes up the full viewport height */
+    }
+
+    .main-content {
+        text-align: center;
+        color: #333; /* Adjust the text color for visibility */
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.8); /* Adds a semi-transparent background behind the content for readability */
+        border-radius: 10px;
+        margin: 50px auto;
+        width: 90%; /* Adjust width for responsiveness */
+        max-width: 800px; /* Prevents the content from getting too wide */
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+
+    .btn {
+        margin: 10px;
+        font-size: 1rem;
+    }
+</style>
+<h1>MedicinePrescriptions</h1>
+
+<p>
+    <a asp-action="Log Out">Log Out.</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AppointmentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Medicine)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoctorName)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var test in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => test.AppointmentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => test.PatientName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => test.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => test.Medicine)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => test.DoctorName)
+                </td>
+                <td>
+                    @*                     <button type="submit" class="btn btn-primary">Distrubute</button>
+                *@
+                    <a asp-action="AppointmentDetails" asp-route-id="@test.AppointmentId">Distrubute</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

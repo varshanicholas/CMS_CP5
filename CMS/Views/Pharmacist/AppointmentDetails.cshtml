@@ -1,0 +1,55 @@
+﻿@model CMS.Models.AppointmentDetailsModel
+
+
+
+<h2>Appointment Details</h2>
+
+<div>
+    <h3>Appointment Information</h3>
+    <p><strong>Appointment ID:</strong> @Model.AppointmentId</p>
+    <p><strong>Appointment Date:</strong> @Model.AppointmentDate.ToShortDateString()</p>
+    <p><strong>Patient Name:</strong> @Model.PatientName</p>
+    <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
+    <p><strong>Email:</strong> @Model.Email</p>
+    <p><strong>Doctor Name:</strong> @Model.DoctorName</p>
+</div>
+
+<div>
+    <h3>Medicine Prescriptions</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Serial No</th>
+                <th>Medicine Name</th>
+                <th>Quantity</th>
+                <th>Dosage</th>
+                <th>Duration</th>
+                <th>Frequency</th>
+                <th>Created Date</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var medicine in Model.Medicines)
+            {
+                <tr>
+                    <td>@medicine.SerialNo</td>
+                    <td>@medicine.MedicineName</td>
+                    <td>@medicine.Quantity</td>
+                    <td>@medicine.Dosage</td>
+                    <td>@medicine.Duration"</td>
+                    <td>@medicine.Frequency" </td>
+                    <td>@medicine.CreatedDate.ToShortDateString()</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="BillDetails" asp-route-id="@Model.AppointmentId" class="btn btn-secondary">Generate bill</a>
+
+</div>
+
+<div class="mt-3">
+    <a asp-action="MedicinePrescriptions" class="btn btn-secondary">Back</a>
+</div>
