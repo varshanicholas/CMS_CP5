@@ -1,0 +1,46 @@
+﻿@model CMS.Models.Patients
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!-- Header with Image -->
+<header class="text-center py-3" style="background-color: #f8f9fa;">
+    <img src="/images/rece.jpg" alt="Clinic Logo" class="img-fluid" style="max-height: 200px; class=" img-fluid w-100">
+</header>
+
+<!-- Welcome message -->
+<h1 class="text-center my-4">Welcome to Receptionist Dashboard</h1>
+
+<div class="text-center my-4">
+    <p class="lead">Manage patient registration efficiently and seamlessly.</p>
+</div>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <!-- Button for Staff Management -->
+        <div class="col-md-4 text-center">
+            <a asp-controller="Receptionist" asp-action="index" class="btn btn-primary btn-lg">
+                Receptionist
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Footer with Image -->
+<footer class="text-center py-3 mt-5" style="background-color: #f8f9fa;">
+    <img src="~/images/footer-logo.png" alt="Clinic Footer Logo" class="img-fluid" style="max-height: 60px;">
+    <p class="mt-2 text-muted">© 2024 Clinic Management System. All Rights Reserved.</p>
+</footer>
+
+<!-- Styles for Layout -->
+<style>
+    header img, footer img {
+        margin: auto;
+        display: block;
+    }
+
+    footer {
+        border-top: 1px solid #eaeaea;
+    }
+</style>

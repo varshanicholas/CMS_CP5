@@ -1,0 +1,94 @@
+﻿@model CMS.Models.AppointmentViewModel
+
+@{
+    ViewData["Title"] = "BookAppointment";
+}
+
+<h1>BookAppointment</h1>
+
+<h2 class="text-center my-4">Book Appointment for <span class="text-primary">@Model.PatientName</span></h2>
+
+<div class="container">
+    <form asp-action="BookAppointment" method="post" class="p-4 border rounded shadow-sm bg-light">
+        @Html.HiddenFor(model => model.PatientId)
+        @Html.HiddenFor(model => model.PatientName)
+
+        <!-- Specialization Dropdown -->
+        <div class="form-group mb-3">
+            <label asp-for="SpecializationId" class="form-label fw-bold">Department</label>
+            <select asp-for="SpecializationId" asp-items="Model.SpecializationNames" class="form-select" id="specializationDropdown">
+                <option value="">-- Select Department --</option>
+            </select>
+            <span asp-validation-for="SpecializationId" class="text-danger small"></span>
+        </div>
+
+        <!-- Doctor Dropdown -->
+        <div class="form-group mb-3">
+            <label asp-for="DoctorId" class="form-label fw-bold">Doctor</label>
+            <select asp-for="DoctorId" asp-items="Model.DoctorNames" class="form-select" id="doctorDropdown">
+                <option value="">-- Select Doctor --</option>
+            </select>
+            <span asp-validation-for="DoctorId" class="text-danger small"></span>
+        </div>
+@* 
+        <!-- Appointment Date -->
+        <div class="form-group mb-3">
+            <label asp-for="AppointmentDate" class="form-label fw-bold">Appointment Date</label>
+            @Html.HiddenFor(model => model.AppointmentDate, new { htmlAttributes = new { @class = "form-control", @value = DateTime.Now.ToString("yyyy-MM-dd") } })
+            <span asp-validation-for="AppointmentDate" class="text-danger small"></span>
+        </div> *@
+
+        <!-- Confirm Button -->
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-lg">Confirm Appointment</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#specializationDropdown').change(function () {
+                var specializationId = $(this).val();
+                if (specializationId) {
+                    $.ajax({
+                        url: '@Url.Action("GetDoctorsBySpecialization", "Receptionist")',
+                        type: 'GET',
+                        data: { specializationId: specializationId },
+                        success: function (data) {
+                            var doctorDropdown = $('#doctorDropdown');
+                            doctorDropdown.empty(); // Clear current options
+                            doctorDropdown.append('<option value="">-- Select Doctor --</option>');
+                            $.each(data, function (index, doctor) {
+                                doctorDropdown.append('<option value="' + doctor.value + '">' + doctor.text + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                $('#doctorDropdown').empty().append('<option value="">-- Select Doctor --</option>');
+                }
+            });
+        });
+    </script>
+}
+
+<style>
+    .container {
+        max-width: 600px;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+</style>
