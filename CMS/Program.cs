@@ -14,11 +14,11 @@ namespace CMS
 
             // Register repositories with connection string
              var connectionString = builder.Configuration.GetConnectionString("connectionStringDoctor");
-            ////builder.Services.AddSingleton<IAppointmentRepository, AppointmentRepository>();
-            //builder.Services.AddSingleton<IAppointmentRepository>(provider => new AppointmentRepository(connectionString));
-            //builder.Services.AddTransient<IConsultationRepository>(provider => new ConsultationRepository(connectionString));
-            //builder.Services.AddTransient<IMedicineRepository>(provider => new MedicineRepository(connectionString));
-            //builder.Services.AddTransient<ILabTestRepository>(provider => new LabTestRepository(connectionString));
+            //builder.Services.AddSingleton<IAppointmentRepository, AppointmentRepository>();
+            builder.Services.AddSingleton<IAppointmentRepository>(provider => new AppointmentRepository(connectionString));
+            builder.Services.AddTransient<IConsultationRepository>(provider => new ConsultationRepository(connectionString));
+            builder.Services.AddTransient<IMedicineRepository>(provider => new MedicineRepository(connectionString));
+            builder.Services.AddTransient<ILabTestRepository>(provider => new LabTestRepository(connectionString));
 
             var app = builder.Build();
 
