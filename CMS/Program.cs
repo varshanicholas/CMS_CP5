@@ -10,7 +10,13 @@ namespace CMS
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+           
+           // builder.Services.AddScoped<IConsultationRepository, ConsultationRepository>();
+
+
             builder.Services.AddScoped<IReceptionistRepository, ReceptionistRepository>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -36,3 +42,7 @@ namespace CMS
         }
     }
 }
+
+
+//  builder.Services.AddScoped<IStaffRepository, StaffRepository>();
+//            builder.Services.AddScoped<ILoginRepository, LoginRepository>();

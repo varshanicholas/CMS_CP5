@@ -1,13 +1,23 @@
+admin_re
+﻿using Microsoft.AspNetCore.Mvc;
+
 ﻿using CMS.Models;
 using CMS.Repository;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+
 namespace CMS.Controllers
 {
     public class ReceptionistController : Controller
     {
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         IReceptionistRepository receptionistRepository = null;
         //private object _receptionistRepository;
 
@@ -366,6 +376,7 @@ namespace CMS.Controllers
 
             return View(confirmationViewModel);
         }
+
 
 
     }
