@@ -1,0 +1,41 @@
+﻿@model CMS.Models.Staff
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+<!-- Welcome message -->
+<h1 class="text-center">Welcome to Admin Dashboard</h1>
+
+<div class="text-center my-4">
+    <p class="lead">Manage your staff and perform administrative tasks efficiently.</p>
+</div>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <!-- Button for Staff Management -->
+        <div class="col-md-4 text-center">
+            <a asp-controller="Staff" asp-action="StaffList" class="btn btn-primary btn-lg">
+                Staff Management
+            </a>
+        </div>
+    </div>
+</div>
+@* <div class="container mt-4">
+    <div class="row justify-content-center">
+        <!-- Button for Staff Management -->
+        <div class="col-md-4 text-center">
+            <a asp-controller="Consultation" asp-action="AddDoctor" class="btn btn-primary btn-lg">
+              Add consultation Fees 
+            </a>
+        </div>
+    </div>
+</div>
+ *@
+<!-- Back to List button (optional) -->
+<div class="text-center mt-4">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-danger">Back to List</a>
+</div>
