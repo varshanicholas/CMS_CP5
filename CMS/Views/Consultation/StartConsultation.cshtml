@@ -1,0 +1,62 @@
+﻿@model CMS.Models.ConsultationModels
+
+<div class="container mt-6">
+    <h2 class="mb-6">Start Consultation</h2>
+
+    <form asp-action="AddConsultationDetails" method="post" class="needs-validation" novalidate>
+        <input type="hidden" asp-for="PatientId" />
+        <input type="hidden" asp-for="AppointmentId" />
+
+        <div class="form-group">
+            <label asp-for="Symptoms" class="form-label">Symptoms:</label>
+            <textarea asp-for="Symptoms" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Diagnosis" class="form-label">Diagnosis:</label>
+            <textarea asp-for="Diagnosis" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="MedicineId" class="form-label">Medicine:</label>
+            <select asp-for="MedicineId" class="form-control">
+                <option value="">-- Select --</option>
+                @foreach (var medicine in ViewBag.Medicines)
+                {
+                    <option value="@medicine.MedicineId">@medicine.MedicineName</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Dosage" class="form-label">Dosage:</label>
+            <input asp-for="Dosage" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Frequency" class="form-label">Frequency:</label>
+            <input asp-for="Frequency" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="TestId" class="form-label">Lab Test:</label>
+            <select asp-for="TestId" class="form-control">
+                <option value="">-- Select --</option>
+                @foreach (var test in ViewBag.LabTests)
+                {
+                    <option value="@test.TestId">@test.TestName</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="TreatmentPlan" class="form-label">Treatment Plan:</label>
+            <textarea asp-for="TreatmentPlan" class="form-control"></textarea>
+        </div>
+        <br>
+
+        <button type="submit" class="btn btn-primary">Add</button> 
+        
+        <a asp-action="ViewPatientHistory" asp-route-patientId="@Model.PatientId" class="btn btn-secondary ml-2">View Patient History</a>
+    </form>
+</div>

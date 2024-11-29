@@ -1,0 +1,65 @@
+﻿@model List<CMS.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Today's Appointments";
+}
+
+<h1>Today's Appointments</h1>
+
+<!-- Search Bar -->
+<div class="mb-4">
+    <form method="get" asp-action="TodaysAppointments" class="form-inline">
+        <div class="form-group">
+            <input type="text" name="search" class="form-control" placeholder="Search by Patient Name/Patient Id" value="@Context.Request.Query["search"]" />
+            <button type="submit" class="btn btn-primary ml-2">Search</button>
+        </div>
+    </form>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <h4>Today's Appointments</h4>
+    <hr />
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Appointment Id</th>
+                    <th>Patient Id</th>
+                    <th>Patient Name</th>
+                    <th>Appointment Date</th>
+                    <th>Token Number</th>
+                    <th>Consultation Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var appointment in Model)
+                {
+                    <tr>
+                        <td>@appointment.AppointmentId</td>
+                        <td>@appointment.PatientId</td>
+                        <td>@appointment.PatientName</td>
+                        <td>@appointment.AppointmentDate.ToString("yyyy-MM-dd")</td>
+                        <td>@appointment.TokenNumber</td>
+                        <td>@appointment.ConsultationStatus</td>
+                        <td>
+                            <!-- Start Consultation Button -->
+                            <a href="@Url.Action("StartConsultation", "Consultation", new { appointmentId = appointment.AppointmentId })" class="btn btn-success">Start Consultation</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>No results found for your search.</p>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Landing Page";
+}
+
+<div class="container mt-5">
+    <h1>Welcome to the Doctor's Portal</h1>
+    <hr />
+    <a href="@Url.Action("TodaysAppointments", "Doctor")" class="btn btn-primary btn-lg">View Today's Appointments</a>
+</div> 
+
+@* below code is for testing purpose with json later comment this *@
+@* 
+<div class="container mt-5">
+    <h1>Welcome to the Doctor's Portal</h1>
+    <p>Hello, @ViewBag.UserName!</p>
+    <hr />
+    <a href="@Url.Action("TodaysAppointments", "Doctor")" class="btn btn-primary btn-lg">View Today's Appointments</a>
+</div>
+ *@

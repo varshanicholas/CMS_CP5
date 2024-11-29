@@ -1,0 +1,51 @@
+﻿@model CMS.Models.ConsultationModels
+
+<h2>Start Consultation</h2>
+
+<form asp-action="AddConsultationDetails" method="post">
+    <input type="hidden" asp-for="PatientId" />
+    <input type="hidden" asp-for="AppointmentId" />
+    <div>
+        <label>Symptoms:</label>
+        <textarea asp-for="Symptoms"></textarea>
+    </div>
+    <div>
+        <label>Diagnosis:</label>
+        <textarea asp-for="Diagnosis"></textarea>
+    </div>
+    <div>
+        <label>Medicine:</label>
+        <select asp-for="MedicineId">
+            <option value="">-- Select --</option>
+            @foreach (var medicine in ViewBag.Medicines)
+            {
+                <option value="@medicine.MedicineId">@medicine.MedicineName</option>
+            }
+        </select>
+        <input type="text" asp-for="OtherMedicine" placeholder="Other medicine" />
+    </div>
+    <div>
+        <label>Dosage:</label>
+        <input asp-for="Dosage" />
+    </div>
+    <div>
+        <label>Frequency:</label>
+        <input asp-for="Frequency" />
+    </div>
+    <div>
+        <label>Lab Test:</label>
+        <select asp-for="TestId">
+            <option value="">-- Select --</option>
+            @foreach (var test in ViewBag.LabTests)
+            {
+                <option value="@test.TestId">@test.TestName</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Doctor Notes:</label>
+        <textarea asp-for="TreatmentPlan"></textarea>
+    </div>
+    <button type="submit">Add</button>
+    <a asp-action="ViewPatientHistory" asp-route-patientId="@Model.PatientId">View Patient History</a>
+</form>

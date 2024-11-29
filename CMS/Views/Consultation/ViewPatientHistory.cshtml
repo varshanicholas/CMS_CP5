@@ -1,0 +1,46 @@
+﻿@model IEnumerable<CMS.Models.PatientHistory>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-7">
+    <h2 class="mb-7">Patient History</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Symptoms</th>
+                <th>Diagnosis</th>
+                <th>Treatment Plan</th>
+                <th>Medicine</th>
+                <th>Frequency</th>
+                <th>Dosage</th>
+                <th>Lab Test</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Symptoms</td>
+                    <td>@item.Diagnosis</td>
+                    <td>@item.TreatmentPlan</td>
+                    <td>@item.Medicine</td>
+                    <td>@item.Frequency</td>
+                    <td>@item.Dosage</td>
+                    <td>@item.LabTest</td>
+                    <td>@item.Date.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <br>
+    </div>
+    <a asp-action="TodaysAppointments" asp-controller="Doctor" asp-route-appointmentId="@ViewBag.AppointmentId" class="btn btn-secondary">
+        Back to Consultation
+    </a>
+    <a asp-action="GeneratePatientReport" asp-controller="Consultation" asp-route-patientId="@Model.FirstOrDefault()?.PatientId" class="btn btn-primary">
+        Download PDF PatientReport
+    </a>
+</div>
